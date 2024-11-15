@@ -39,6 +39,15 @@ func RequestUrlWithoutQueryParams(
 	return WithoutQueryParams(nu, params...)
 }
 
+// RequestUriWithoutSchemeHost returns a new URL instance without scheme and
+// host (domain).
+func RequestUriWithoutSchemeHost(req *http.Request) *url.URL {
+	nu := *req.URL
+	nu.Scheme = ""
+	nu.Host = ""
+	return &nu
+}
+
 // WithQueryParam returns a URL with the given query parameters set.
 func WithQueryParam(u url.URL, name string, value string) *url.URL {
 	query := u.Query()

@@ -43,3 +43,12 @@ func Test_RequestUrlWithoutQueryParams(t *testing.T) {
 	u := RequestUrlWithoutQueryParams(request, "abc")
 	assert.Equal(t, "https://example.com?def=456", u.String())
 }
+
+func Test_RequestUriWithoutSchemeHost(t *testing.T) {
+	request, err := http.NewRequest(
+		http.MethodGet, "https://example.com/path/ep?abc=123&def=456", nil,
+	)
+	assert.Nil(t, err)
+	u := RequestUriWithoutSchemeHost(request)
+	assert.Equal(t, "/path/ep?abc=123&def=456", u.String())
+}
